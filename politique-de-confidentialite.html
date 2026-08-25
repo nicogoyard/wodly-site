@@ -32,74 +32,97 @@
 
 <main>
   <h1>Politique de confidentialité</h1>
-  <div class="date">Dernière mise à jour : juin 2025</div>
+  <div class="date">Dernière mise à jour : 25 août 2026</div>
 
-  <p>WODly (ci-après « l'Application ») est éditée par Nicolas Goyard. La présente politique de confidentialité décrit la façon dont nous collectons, utilisons et protégeons vos données personnelles lorsque vous utilisez l'Application.</p>
+  <p>WODly (ci-après « l'Application ») est éditée par Nicolas Goyard. La présente politique décrit les données que nous collectons, ce que nous en faisons, et lesquelles sont visibles par d'autres utilisateurs.</p>
+
+  <div class="highlight">
+    <p><strong>Le point le plus important :</strong> WODly est une application communautaire. Vos séances d'entraînement, vos scores et votre profil sont <strong>visibles par les autres athlètes inscrits</strong>. Vos notes personnelles, elles, ne le sont jamais. Le détail figure à la section 3.</p>
+  </div>
 
   <h2>1. Données collectées</h2>
   <p>Nous collectons uniquement les données nécessaires au fonctionnement de l'Application :</p>
   <ul>
-    <li><strong>Données de compte</strong> : adresse e-mail et pseudonyme (si vous créez un compte).</li>
-    <li><strong>Données d'entraînement</strong> : WODs réalisés, temps, scores, records personnels (PRs), préférences de niveau et de matériel.</li>
-    <li><strong>Données techniques</strong> : type d'appareil, version iOS, identifiant anonyme de session.</li>
-    <li><strong>Données de paiement</strong> : gérées exclusivement par Stripe (Apple In-App Purchase). WODly ne stocke aucune coordonnée bancaire.</li>
+    <li><strong>Compte</strong> : adresse e-mail, pseudonyme, prénom, niveau déclaré, matériel disponible, box d'appartenance et photo de profil si vous en ajoutez une. L'Application peut fonctionner sans compte : elle crée alors un <strong>compte anonyme</strong>, sans e-mail, que vous pouvez rattacher à une adresse plus tard.</li>
+    <li><strong>Entraînement</strong> : WODs réalisés, temps, scores détaillés, répétitions par mouvement, records personnels et notes personnelles.</li>
+    <li><strong>Communauté</strong> : abonnements à d'autres athlètes, commentaires, réactions.</li>
+    <li><strong>Support</strong> : le contenu de vos messages, accompagné du contexte technique (version de l'Application, plateforme, dimensions d'écran) pour pouvoir traiter un signalement de bug.</li>
+    <li><strong>Achats</strong> : gérés par <strong>Apple (StoreKit)</strong> et <strong>RevenueCat</strong>. WODly ne voit ni ne stocke aucune coordonnée bancaire.</li>
   </ul>
-  <p>Nous ne collectons pas de données de localisation, de contacts, ni d'accès à votre galerie photo.</p>
+  <p>Nous ne collectons ni données de localisation, ni contacts, ni accès à votre galerie photo au-delà de l'image que vous choisissez comme avatar.</p>
 
   <h2>2. Utilisation des données</h2>
-  <p>Vos données sont utilisées pour :</p>
   <ul>
-    <li>Générer et personnaliser votre WOD du jour selon votre niveau et votre matériel.</li>
-    <li>Sauvegarder votre historique d'entraînement et vos records personnels.</li>
-    <li>Gérer votre abonnement (Gratuit, Pro ou Élite).</li>
-    <li>Améliorer les algorithmes de génération de WOD (données anonymisées et agrégées uniquement).</li>
-    <li>Vous envoyer des notifications d'entraînement, si vous avez activé cette option.</li>
+    <li>Générer votre WOD selon votre niveau, votre matériel et votre historique.</li>
+    <li>Sauvegarder votre historique d'entraînement et vos records.</li>
+    <li>Faire fonctionner la communauté : profils, fil d'activité, classement, commentaires, réactions.</li>
+    <li>Gérer votre abonnement et les offres en cours.</li>
+    <li>Vous envoyer des notifications, si vous les avez activées.</li>
+    <li>Améliorer les algorithmes de génération, sur des données agrégées.</li>
   </ul>
 
-  <h2>3. Partage des données</h2>
-  <p>Nous ne vendons jamais vos données personnelles. Elles peuvent être partagées uniquement avec :</p>
+  <h2>3. Ce qui est visible par les autres utilisateurs</h2>
+  <p>Cette section décrit une <strong>publication</strong>, pas un simple stockage. Lisez-la avant de créer un compte.</p>
+  <p><strong>Visible par tout athlète inscrit</strong>, qu'il fasse partie de vos amis ou non :</p>
   <ul>
-    <li><strong>Supabase</strong> (base de données hébergée en UE) : stockage sécurisé de votre compte et de vos données d'entraînement.</li>
-    <li><strong>Stripe / Apple</strong> : traitement des paiements et abonnements.</li>
-    <li><strong>Anthropic</strong> (si vous utilisez le Coach IA Alex) : votre message et le contexte de votre entraînement sont transmis pour générer une réponse. Aucun historique n'est conservé après la session.</li>
+    <li>Votre prénom, votre pseudonyme, votre niveau, votre box et votre photo de profil.</li>
+    <li>Vos séances : date, type de WOD, mouvements et score.</li>
+    <li>Vos statistiques et badges, et votre position au classement.</li>
+    <li>Vos commentaires et vos réactions.</li>
+  </ul>
+  <p><strong>Visible par vous seul</strong>, et par personne d'autre :</p>
+  <ul>
+    <li><strong>Vos notes personnelles</strong> attachées à une séance. Elles sont stockées séparément de la séance et protégées au niveau de la base de données ; ni un autre utilisateur ni une requête publique ne peuvent y accéder.</li>
+    <li>Vos conversations avec le coach IA.</li>
+    <li>Votre adresse e-mail.</li>
+  </ul>
+  <p>Le fil d'activité n'affiche par défaut que les athlètes que vous suivez, mais un profil reste consultable par n'importe qui. Si vous ne souhaitez pas publier vos entraînements, n'utilisez pas les fonctions communautaires — ou demandez la suppression de votre compte (section 6).</p>
+
+  <h2>4. Partage avec des tiers</h2>
+  <p>Nous ne vendons jamais vos données personnelles. Elles sont transmises uniquement à :</p>
+  <ul>
+    <li><strong>Supabase</strong> — hébergement de la base de données et de l'authentification, sur des serveurs situés en <strong>Irlande (Union européenne)</strong>.</li>
+    <li><strong>Apple et RevenueCat</strong> — traitement des achats et des abonnements.</li>
+    <li><strong>Anthropic</strong> — si vous utilisez le coach IA : votre message et le contexte de votre séance sont transmis pour générer une réponse. Vos conversations sont <strong>conservées localement sur votre appareil</strong> pour que vous puissiez les relire, et effacées lorsque vous les supprimez ou désinstallez l'Application.</li>
   </ul>
 
-  <h2>4. Conservation des données</h2>
-  <p>Vos données sont conservées tant que votre compte est actif. Vous pouvez demander la suppression de toutes vos données à tout moment en nous contactant à <a href="mailto:contact@wodly.app">contact@wodly.app</a>. Les données seront supprimées dans un délai de 30 jours.</p>
+  <h2>5. Données stockées sur votre appareil</h2>
+  <p>L'Application conserve localement vos réglages, votre historique de séances, vos records, vos conversations avec le coach IA, votre journal de notifications et votre jeton de connexion. Ces données restent sur votre iPhone. Désinstaller l'Application les efface ; cela ne supprime pas votre compte ni les données déjà synchronisées.</p>
 
-  <h2>5. Sécurité</h2>
-  <p>Nous utilisons des connexions HTTPS chiffrées pour tous les échanges de données. L'accès à la base de données est restreint et protégé. Vos mots de passe ne sont jamais stockés en clair.</p>
+  <h2>6. Conservation et suppression</h2>
+  <p>Vos données sont conservées tant que votre compte est actif. Vous pouvez demander la suppression complète de votre compte et de vos données en écrivant à <a href="mailto:contact@wodly-app.com">contact@wodly-app.com</a>. La suppression intervient dans un délai de 30 jours et retire également vos séances publiées, vos commentaires et vos réactions.</p>
 
-  <h2>6. Vos droits (RGPD)</h2>
-  <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez des droits suivants :</p>
+  <h2>7. Sécurité</h2>
+  <p>Les échanges passent par des connexions HTTPS chiffrées. L'accès aux données est restreint au niveau de la base par des règles par utilisateur. Vos mots de passe ne sont jamais stockés en clair et ne sont accessibles à personne, pas même à l'Éditeur.</p>
+
+  <h2>8. Vos droits (RGPD)</h2>
   <ul>
-    <li><strong>Droit d'accès</strong> : obtenir une copie de vos données.</li>
-    <li><strong>Droit de rectification</strong> : corriger vos informations inexactes.</li>
-    <li><strong>Droit à l'effacement</strong> : supprimer votre compte et vos données.</li>
-    <li><strong>Droit à la portabilité</strong> : recevoir vos données dans un format standard.</li>
-    <li><strong>Droit d'opposition</strong> : vous opposer à certains traitements.</li>
+    <li><strong>Accès</strong> : obtenir une copie de vos données.</li>
+    <li><strong>Rectification</strong> : corriger vos informations inexactes.</li>
+    <li><strong>Effacement</strong> : supprimer votre compte et vos données.</li>
+    <li><strong>Portabilité</strong> : recevoir vos données dans un format standard.</li>
+    <li><strong>Opposition</strong> : vous opposer à certains traitements.</li>
   </ul>
-  <p>Pour exercer ces droits, contactez-nous à <a href="mailto:contact@wodly.app">contact@wodly.app</a>.</p>
+  <p>Pour exercer ces droits, écrivez à <a href="mailto:contact@wodly-app.com">contact@wodly-app.com</a>.</p>
 
-  <h2>7. Publicité</h2>
-  <p>L'application affiche des publicités aux utilisateurs du plan Gratuit lors du lancement d'un entraînement. Ces publicités sont servies via un réseau tiers (placeholder — Google AdMob ou équivalent). Elles peuvent utiliser des identifiants publicitaires anonymes fournis par iOS. Vous pouvez désactiver la personnalisation publicitaire dans les réglages de votre iPhone : <strong>Réglages → Confidentialité → Publicité Apple</strong>.</p>
-  <p>Les utilisateurs abonnés (Pro et Élite) ne voient aucune publicité.</p>
+  <h2>9. Publicité</h2>
+  <p><strong>À ce jour, l'Application n'affiche aucune publicité et aucune régie publicitaire n'y est intégrée.</strong> Nous prévoyons d'en afficher aux utilisateurs du plan Gratuit. Le jour où ce sera le cas, cette politique sera mise à jour avant activation, et le partenaire ainsi que les identifiants utilisés y seront nommés. Les abonnés Pro et Élite ne verront aucune publicité.</p>
 
-  <h2>8. Notifications</h2>
-  <p>Si vous activez les notifications, nous vous enverrons des rappels d'entraînement selon vos préférences. Vous pouvez désactiver les notifications à tout moment dans les réglages de l'Application ou dans les réglages iOS.</p>
+  <h2>10. Notifications</h2>
+  <p>Si vous les activez, vous recevrez des rappels d'entraînement et des notifications d'activité de la communauté (nouvel abonné, commentaire, réaction, séance d'un athlète suivi). Elles sont désactivables à tout moment dans l'Application ou dans les réglages iOS.</p>
 
-  <h2>9. Mineurs</h2>
+  <h2>11. Mineurs</h2>
   <p>WODly n'est pas destiné aux personnes de moins de 16 ans. Nous ne collectons pas sciemment de données concernant des mineurs.</p>
 
-  <h2>10. Modifications</h2>
-  <p>Nous pouvons mettre à jour cette politique de confidentialité. Toute modification substantielle sera notifiée via l'Application. La date de dernière mise à jour figure en haut de cette page.</p>
+  <h2>12. Modifications</h2>
+  <p>Nous pouvons mettre à jour cette politique. Toute modification substantielle sera notifiée via l'Application. La date de dernière mise à jour figure en haut de cette page.</p>
 
-  <h2>11. Contact</h2>
-  <p>Pour toute question relative à cette politique ou à vos données personnelles :</p>
+  <h2>13. Contact</h2>
+  <p>Pour toute question relative à cette politique ou à vos données :</p>
   <p><strong>Nicolas Goyard</strong><br/>
-  E-mail : <a href="mailto:contact@wodly.app">contact@wodly.app</a></p>
+  E-mail : <a href="mailto:contact@wodly-app.com">contact@wodly-app.com</a></p>
 </main>
 
-<footer>© 2025 WODly — Nicolas Goyard</footer>
+<footer>© 2026 WODly — Nicolas Goyard</footer>
 </body>
 </html>
