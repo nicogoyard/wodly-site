@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Nouveau mot de passe — WODly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Plus Jakarta Sans',sans-serif;background:#FCF6EA;color:#18181B;line-height:1.6;min-height:100vh;}
+  nav{background:rgba(255,255,255,.95);border-bottom:1px solid #E8E4DE;padding:0 24px;height:60px;display:flex;align-items:center;gap:10px;}
+  nav a{font-size:.85rem;color:#FF6B35;font-weight:700;text-decoration:none;}
+  nav span{color:#B0AAA2;font-size:.85rem;}
+  main{max-width:440px;margin:0 auto;padding:56px 24px 80px;}
+  h1{font-size:1.8rem;font-weight:900;letter-spacing:-1px;margin-bottom:8px;}
+  .sous{color:#5A5349;font-size:.9rem;margin-bottom:32px;}
+  label{display:block;font-size:.62rem;font-weight:700;color:#656C79;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;}
+  input{width:100%;padding:15px 16px;background:#fff;border:1.5px solid #E8E4DE;border-radius:12px;
+        font-family:inherit;font-size:1rem;font-weight:600;color:#18181B;outline:none;margin-bottom:16px;}
+  input:focus{border-color:#FF6B35;}
+  button{width:100%;padding:16px;border-radius:14px;background:#3B6099;border:none;color:#fff;
+         font-family:inherit;font-size:.95rem;font-weight:800;cursor:pointer;box-shadow:0 8px 22px rgba(59,96,153,.26);}
+  button:disabled{background:#EFEAE1;color:#A8A29A;cursor:default;box-shadow:none;}
+  .msg{padding:12px 14px;border-radius:12px;font-size:.85rem;font-weight:600;margin-bottom:16px;line-height:1.5;}
+  .err{background:#FEF2F2;border:1px solid #FCA5A5;color:#B3261E;}
+  .ok{background:#ECFDF5;border:1px solid #6EE7B7;color:#065F46;}
+  .aide{font-size:.78rem;color:#8A8175;margin-top:18px;line-height:1.6;}
+  footer{text-align:center;padding:32px 24px;font-size:.78rem;color:#B0AAA2;}
+</style>
+</head>
+<body>
+<nav><a href="index.html">← WODly</a><span>/</span><span>Nouveau mot de passe</span></nav>
+<main>
+  <h1>Nouveau mot de passe</h1>
+  <div class="sous">Choisis-en un nouveau, puis reconnecte-toi dans l'application.</div>
+  <div id="message"></div>
+  <form id="form" style="display:none">
+    <label for="mdp">Nouveau mot de passe</label>
+    <input id="mdp" type="password" autocomplete="new-password" placeholder="Au moins 6 caractères"/>
+    <label for="mdp2">Confirme-le</label>
+    <input id="mdp2" type="password" autocomplete="new-password" placeholder="Le même, une seconde fois"/>
+    <button type="submit" id="valider">Enregistrer</button>
+  </form>
+  <div class="aide">Ce lien n'est valable qu'une heure. Passé ce délai, redemande une réinitialisation depuis l'application.</div>
+</main>
+<footer>WODly</footer>
+
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+const SUPABASE_URL = 'https://pfbebvvbkcskmprvlluo.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBmYmVidnZia2Nza21wcnZsbHVvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2MTkzODEsImV4cCI6MjA5NjE5NTM4MX0.dB43W1_ayBWvh5t25cAUWK_O7-dW0j3cCVRJpMfzk58';
+
+const sb = createClient(SUPABASE_URL, SUPABASE_KEY, { auth:{ detectSessionInUrl:true, flowType:'implicit' } });
+const message = document.getElementById('message');
+const form    = document.getElementById('form');
+const bouton  = document.getElementById('valider');
+
+const dire = (texte, classe='err') => { message.innerHTML = '<div class="msg '+classe+'">'+texte+'</div>'; };
+
+/* Supabase place le jeton de récupération dans le FRAGMENT de l'URL
+   (#access_token=...), jamais dans la query : il ne part donc pas au serveur.
+   supabase-js le lit tout seul, mais on vérifie qu'une session en est bien
+   sortie avant de montrer le formulaire — sinon l'athlète saisirait un mot de
+   passe dans le vide. */
+const params = new URLSearchParams(location.hash.slice(1));
+if (params.get('error_description')) {
+  dire('Ce lien n\'est plus valable — il a expiré ou a déjà servi. Redemande une réinitialisation depuis l\'application.');
+} else {
+  const { data } = await sb.auth.getSession();
+  if (data?.session) { form.style.display = 'block'; }
+  else {
+    setTimeout(async () => {
+      const { data:d2 } = await sb.auth.getSession();
+      if (d2?.session) { message.innerHTML=''; form.style.display='block'; }
+      else dire('Ouvre cette page depuis le lien reçu par e-mail. Si tu l\'as fait, le lien a peut-être expiré : redemande une réinitialisation depuis l\'application.');
+    }, 900);
+  }
+}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const a = document.getElementById('mdp').value;
+  const b = document.getElementById('mdp2').value;
+  if (a.length < 6)  { dire('Ton mot de passe doit faire au moins 6 caractères.'); return; }
+  if (a !== b)       { dire('Les deux mots de passe ne sont pas identiques.'); return; }
+  bouton.disabled = true; bouton.textContent = 'Enregistrement…';
+  const { error } = await sb.auth.updateUser({ password: a });
+  if (error) {
+    dire('Impossible d\'enregistrer : ' + error.message);
+    bouton.disabled = false; bouton.textContent = 'Enregistrer';
+    return;
+  }
+  form.style.display = 'none';
+  dire('C\'est fait. Retourne dans WODly et connecte-toi avec ton nouveau mot de passe.', 'ok');
+});
+</script>
+</body>
+</html>
